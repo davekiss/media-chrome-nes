@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Media Chrome Theme</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .my-4 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .mt-4 {
+        margin-top: 1rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 1rem;
+      }
+
+      html,
+      body,
+      pre,
+      code,
+      kbd,
+      span {
+        font-family: "Press Start 2P" !important;
+        color: white;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+      }
+
+      media-control-bar {
+        align-items: center;
+      }
+
+      media-play-button,
+      media-seek-backward-button,
+      media-seek-forward-button,
+      media-mute-button {
+        --media-control-background: none;
+        --media-control-hover-background: none;
+      }
+
+      media-time-range {
+        width: 100%;
+
+        --media-range-track-border: 4px dashed black;
+        --media-control-background: white;
+        --media-control-hover-background: white;
+        /* --media-time-buffered-color: conic-gradient(blue 25%, yellow 0 50%, green 0 75%, red 0) 0 0/20px 20px; */
+
+        --media-range-track-height: 40px;
+        --media-control-height: 48px;
+        --media-control-padding: 4px;
+
+        /* --media-range-track-background: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%); */
+        /* --media-range-track-background: transparent; */
+
+        --media-range-track-background: conic-gradient(white 25%, black 0 50%, #eee 0 75%, #666 0) 0 0/20px 20px;
+        --media-range-thumb-background: transparent;
+        --media-range-bar-color: #4b9ae7;
+
+
+        --media-preview-time-background: black;
+      }
+
+      media-volume-range {
+        --media-control-background: white;
+        --media-control-hover-background: white;
+        --media-range-bar-color: #92cc41;
+
+        --media-range-thumb-background: #eee;
+        --media-range-thumb-height: 32px;
+        --media-range-thumb-width: 32px;
+        --media-range-thumb-border: 3px dotted black;
+        --media-range-thumb-border-radius: 100%;
+
+        --media-range-track-height: 24px;
+        /* --media-range-track-border: 4px dotted black; */
+        --media-range-track-border-radius: .75rem;
+      }
+
+      media-controller {
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+
+      /* NES shims */
+      .message-list > .message.-left {
+        align-self: flex-start;
+      }
+
+      .message-list > .message {
+        display: flex;
+      }
+
+      .message-list > .message.-left i {
+        margin-right: 2rem;
+      }
+
+      .message-list > .message i {
+        align-self: flex-end;
+      }
+
+      .stars {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 20px 0;
+      }
+    </style>
+    <link
+      href="https://unpkg.com/nes.css@latest/css/nes.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/media-chrome@0.17/+esm"
+    ></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/media-chrome@0.17/dist/media-theme-element.js"
+    ></script>
+  </head>
+
+  <body>
+    <div class="container my-4">
+      <section class="nes-container my-4">
+        <section class="message-list">
+          <section class="message -left">
+            <i class="nes-bcrikko"></i>
+            <!-- Balloon -->
+            <div class="nes-balloon from-left">
+              <p>Welcome to Media Chrome!</p>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <media-controller id="myController">
+        <video
+          slot="media"
+          src="https://stream.mux.com/Kp37cpvEawKWDJrxkerLVXHOtyOsM7RMBhI9qGfYZso/low.mp4"
+        ></video>
+      </media-controller>
+
+      <div class="my-4 nes-container is-rounded with-title w-full ">
+        <p class="title nes-text is-primary">RBI Baseball</p>
+
+        <div class="nes-container with-title is-centered mb-4">
+          <p class="title">Game progress</p>
+          <media-time-range media-controller="myController"></media-time-range>
+        </div>
+
+        <!-- Controls-->
+
+        <media-control-bar media-controller="myController">
+
+          <media-play-button media-paused media-controller="myController">
+            <span slot="play">
+              <button type="button" class="nes-btn is-primary">Play</button>
+            </span>
+            <span slot="pause">
+              <button type="button" class="nes-btn is-disabled">Play</button>
+            </span>
+          </media-play-button>
+  
+          <media-play-button media-controller="myController">
+            <span slot="play">
+              <button type="button" class="nes-btn is-disabled">Pause</button>
+            </span>
+            <span slot="pause">
+              <button type="button" class="nes-btn is-primary">Pause</button>
+            </span>
+          </media-play-button>
+  
+          <media-seek-backward-button media-controller="myController">
+            <span slot="backward">
+              <button type="button" class="nes-btn">Backward</button>
+            </span>
+          </media-seek-backward-button>
+  
+          <media-seek-forward-button media-controller="myController">
+            <span slot="forward">
+              <button type="button" class="nes-btn">Forward</button>
+            </span>
+          </media-seek-forward-button>
+  
+          <media-volume-range media-controller="myController"></media-volume-range>
+  
+          <media-mute-button media-controller="myController">
+            <span slot="off"><span class="nes-text is-disabled">Off</span></span>
+            <span slot="low"><span class="nes-text is-warning">Low</span></span>
+            <span slot="medium"><span class="nes-text is-success">Good</span></span>
+            <span slot="high"><span class="nes-text is-error">Loud</span></span>
+          </media-mute-button>
+
+        </media-control-bar>
+
+
+        <div class="stars">
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+          <i class="nes-icon is-large star"></i>
+        </div>
+
+        <div class="lists">
+          <ul class="nes-list is-disc">
+            <li>Built with <a href="https://www.media-chrome.org/en/media-time-range" target="_blank">Media Chrome</a></li>
+            <li>No custom Javascript</li>
+            <li>Made with <a href="https://mux.com" target="_blank">Mux</a></li>
+            <li>Dave Kiss, Hackapalooza 2023</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
